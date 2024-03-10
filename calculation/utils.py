@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from sympy import *
 from statistics import fmean, stdev
 
 def menu(message, options):
@@ -23,7 +24,7 @@ def newData():
     n = int(input("Digite o n° de valores: "))
     v = int(input("Digite o n° de varíaveis: "))
     variables = values(n, v)
-    
+
     df = pd.DataFrame(data = variables)
     for x in variables:
         df[f"MÉDIA ({x})"] = fmean(variables[x])
