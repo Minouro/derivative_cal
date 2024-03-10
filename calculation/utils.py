@@ -13,24 +13,29 @@ def values(n, v):
     variables = {}
     for x in range(v):
         measures = []
-        label = input(f"\nDigite nome da {x+1}º variável: ")
+        label = input(f"\nDigite nome da {x+1}º icógnita: ")
         for y in range(n):
-            measures.append(float(input(f"({label.upper()}) Digite o {y+1}° valor: ").replace(",",".")))
-        variables[label.upper()] = measures
-        print(f"{label.upper()} definido com sucesso!")
+            measures.append(float(input(f"({label}) Digite o {y+1}° valor: ").replace(",",".")))
+        variables[label] = measures
+        print(f"{label} definido com sucesso!")
     return variables
 
 def newData():
+    v = int(input("Digite o n° de icógnitas: "))
     n = int(input("Digite o n° de valores: "))
-    v = int(input("Digite o n° de varíaveis: "))
     variables = values(n, v)
+    createData(variables)
+    derivative(variables)
 
+def createData(variables):
     df = pd.DataFrame(data = variables)
-    for x in variables:
-        df[f"MÉDIA ({x})"] = fmean(variables[x])
-        df[f"DESVIO PADRÃO ({x})"] = stdev(variables[x])
     df.to_excel("planilha.xlsx", index=False)
     print(f"\n{df}\n")
+
+def loadData():
+    df = pd.read_excel("planilha.xlsx")
+    print(f"\n{df}\n")
+    derivative(df)
 
 def loadGraph(x, y, x_label, y_label):
     plt.plot(x, y)
@@ -39,18 +44,31 @@ def loadGraph(x, y, x_label, y_label):
     plt.ylabel(y_label)
     plt.show()
 
-def loadData():
-    df = pd.read_excel("planilha.xlsx")
-    label_1 = df.columns[0]
-    label_2 = df.columns[1]
-    df[f"MÉDIA ({label_2})"] = fmean(df[label_2])
-    df[f"DESVIO PADRÃO ({label_2})"] = stdev(df[label_2])
-    df.to_excel("planilha.xlsx", index=False)
-    print(f"\n{df}\n")
-    loadGraph(df[label_1], df[label_2], label_1, label_2)
+def derivative(variables):
+    s = []
+    der = []
+    res = []
 
+    f = sympify(input("Digite a função: "))
+
+    for x in variables:
+        print(f"\nMédia ({x}): {fmean(variables[x])}")
+        print(f"Desvio Padrão ({x}): {stdev(variables[x])}")
+        s.append(Variable(x, fmean(variables[x])))
+
+    for var in s:
+        der.append(diff(f, var.name))
+    
+    for d in der:
+        print(f"\nDerivada: {d}")
+        for var in s:
+            d = d.subs(var.name, var.value)
+        res.append(d)
+        print(f"Resultado: {d}")
+
+    return der
 class Variable:
-    def __init__(self, name, values):
-        self.name = name
-        self.values = values
+    def __init__(self, name, value):
+        self.name = symbols(name)
+        self.value = value
     
