@@ -11,7 +11,7 @@ No Prompt de Comando, selecione a pasta em que baixou o arquivo com `cd Insira\L
 ## Executando o código 😎
 Sempre inicie o ambiente virtual com `.venv\Scripts\activate` antes de executar `python main.py`<br>
 
-##Como usar 🤩
+## Como usar 🤩
 1º Digite o número de variáveis<br>
 2º Digite o número de valores<br>
 3° Digite a icógnita (devem ser as mesmas usadas nas fórmulas!)<br>
