@@ -2,16 +2,16 @@
 Utilizando Python 3.12<br>
 <i>Instruções especiais para o Heber</i><br>
 
-## Criando ambiente virtual🐍
+## 🐍Criando ambiente virtual
 No Prompt de Comando, selecione a pasta em que baixou o arquivo com `cd Insira\Local\Do\Arquivo\Aqui`<br>
 `python -m venv .venv`<br>
 `.venv\Scripts\activate`<br>
 `pip install -r requirements.txt`<br>
 
-## Executando o código 😎
+## 😎Executando o código 
 Sempre inicie o ambiente virtual com `.venv\Scripts\activate` antes de executar `python main.py`<br>
 
-## Como usar 🤩
+## 🤩Como usar 
 1º Digite o número de variáveis<br>
 2º Digite o número de valores<br>
 3° Digite a icógnita (devem ser as mesmas usadas nas fórmulas!)<br>
