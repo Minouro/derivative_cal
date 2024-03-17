@@ -97,22 +97,28 @@ def minMethod(variables):
     arrayX = np.array(variables[x])
     arrayY = np.array(variables[y])
 
-    mean_x = fmean(arrayX)
-    mean_y = fmean(arrayY)
-    sxx = fmean(np.power(arrayX, 2))
-    sxy = fmean(np.multiply(arrayX, arrayY))
+    mean_x = fmean(arrayX) # média de x
+    mean_y = fmean(arrayY) # média de y
+    sxx = fmean(np.power(arrayX, 2)) # x elevado ao quadrado
+    sxy = fmean(np.multiply(arrayX, arrayY)) # x vezes y
 
     a0 = (sxx*mean_y - mean_x*sxy)/(sxx - mean_x**2)
     a1 = (sxy - mean_x*mean_y)/(sxx - mean_x**2)
+
+    # y = a1 + a0 * x
 
     print(f"\na0 = {a0}")
     print(f"a1 = {a1}")
 
     points = []
     for v in variables[x]:
-        points.append(a1+a0*v)
+        points.append(a0+a1*v)
     plt.plot(variables[x], points)
     plt.plot(variables[x] , variables[y], "bo")
+    plt.title(f"{y.upper()} VERSUS {x.upper()}")
+    plt.xlabel(x.upper())
+    plt.ylabel(y.upper())
+    plt.grid()
     plt.show()
 
 def plotAxis(variables):
